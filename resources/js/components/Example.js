@@ -1,23 +1,57 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 
+import React, { createContext, useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch
+} from "react-router-dom";
+import Cookies from 'js-cookie'
+import Navbar from "./Navbar/Navbar.js";
+import Login from "./Login/Login.js"
+import Posts from './Posts/Posts.js';
+import PrivateRoute from './PrivateRoute/PrivateRoute.js';
+import LoginRoute from './PrivateRoute/LoginRoute.js';
+
+export const UserContext = createContext();
 function Example() {
+    
+    const [loggedInUser, setLoggedInUser] = useState(null);
+    
+    useEffect(()=>{
+        const uname = Cookies.get('uname');
+        if(uname) {setLoggedInUser(uname);}
+    },[Cookies.get('uname')]);
     return (
         <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header"> Component</div>
-                        <div className="card-body">I'm an example component!</div>
-                    </div>
-                </div>
-            </div>
+            <UserContext.Provider value={[loggedInUser, setLoggedInUser]} className="container">
+                {/* <h3>email: {loggedInUser.email}</h3> */}
+                <Router>
+
+                    <Switch>
+                        <Route exact path="/">
+                            <Navbar></Navbar>
+                        </Route>
+                        {/* <PrivateRoute path="/dashboard/:panel">
+              <Dashboard adminLoading={adminLoading} />
+            </PrivateRoute> */}
+                        <Route path="/login">
+                            <Login />
+                        </Route>
+                        <PrivateRoute path="/posts">
+                            <Posts></Posts>
+                        </PrivateRoute>
+                    </Switch>
+
+                </Router>
+            </UserContext.Provider>
         </div>
     );
 }
 
 export default Example;
 
-if (document.getElementById('example')) {
-    ReactDOM.render(<Example />, document.getElementById('example'));
+if (document.getElementById('app')) {
+    ReactDOM.render(<Example />, document.getElementById('app'));
 }
+
