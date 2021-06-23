@@ -24,3 +24,5 @@ Route::post('register', [loginController::class, 'register']);
 
 Route::get('posts', [PostController::class, 'index']);
 Route::get('myposts', [MyPostController::class, 'index']);
+
+Route::post('addpost', [MyPostController::class, 'store']);

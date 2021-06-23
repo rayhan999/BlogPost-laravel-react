@@ -37,9 +37,30 @@ class MyPostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        $value = $req->cookie('uname');
+        // $post_create = array();
+        // $post_create['title'] = $req->title;
+        // $post_create['description'] = $req->description;
+        // $post_create['creator'] = $value;
+        // $post = DB::table('posts')->insert($post_create);
+        // if ($post) {
+        //     // error_log($user);
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+        $post = new Post();
+        $post->title = $req->title;
+        $post->description = $req->description;
+        $post->creator = $value;
+        $post->save();
+        if ($post) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -3,6 +3,7 @@ import Navbar from '../Navbar/Navbar';
 
 const Posts = () => {
     const [posts, setPosts] = useState();
+    const [visible, setVisible] = useState(2);
     useEffect(() => {
         axios.get(`http://localhost:8000/api/posts`)
             .then(res => {
@@ -12,42 +13,35 @@ const Posts = () => {
             })
             .catch(error => console.log(error.message))
     }, []);
+    const handleLoadMore = () => {
+        setVisible(oldValue=> oldValue + 2);
+    }
     return (
         <div>
             <Navbar></Navbar>
             <div className="container mt-5">
                 <div className="d-flex justify-content-between">
                     <h3 className="">Posts</h3>
-                   
+
                 </div>
-                <div className="table-responsive">
+                <div className="">
+                    {posts &&
+                        posts.slice(0,visible).map(post => {
+                            return (
 
-                    <table className="table table-striped align-middle text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col">id</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { posts &&
-                                posts.map(post => {
-                                    return (
-                                        <tr key={ post.id}>
-                                            <th scope="row">{post.id }</th>
-                                            <td>{post.title}</td>
-                                            <td>{post.description}</td>
-                                            <td>edit</td>
-                                        </tr>
-                                    )
-                                })
-                            }
-
-
-                        </tbody>
-                    </table>
+                                <div class="card mb-4" >
+                                    <div class="card-body">
+                                        <h5 class="card-title">{post.title}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{post.creator}</h6>
+                                        <p class="card-text">{post.description.slice(0, 100)}...</p>
+                                        <a href="#" class="btn btn-info card-link">Details</a>
+                                        {/* <a href="#" class="card-link">Another link</a> */}
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                    <button className="btn btn-primary btn-block" onClick={handleLoadMore}>Load More</button>
                 </div>
             </div>
         </div>

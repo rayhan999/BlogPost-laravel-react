@@ -35,7 +35,7 @@ class loginController extends Controller
      */
     public function verify(Request $req)
     {
-        error_log($req);
+        // error_log($req);
         $user = DB::table('users')
             ->where('uname', $req->uname)
             ->where('password', $req->password)
@@ -49,14 +49,14 @@ class loginController extends Controller
     }
     public function register(Request $req)
     {
-        error_log($req);
+        // error_log($req);
         $user_create = array();
         $user_create['uname'] = $req->uname;
         $user_create['email'] = $req->email;
         $user_create['password'] = $req->password;
         $user = DB::table('users')->insert($user_create);
         if ($user) {
-            error_log($user);
+            // error_log($user);
             return true;
         } else {
             return false;

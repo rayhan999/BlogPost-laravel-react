@@ -14,11 +14,11 @@ class PostController extends Controller
      */
     public function index(Request $req)
     {
-        error_log("------------------------------------");
+        // error_log("------------------------------------");
 
         $value = $req->cookie('uname');
         $myposts = Post::all();
-        error_log($myposts);
+        // error_log($myposts);
         return $myposts;
     }
 
