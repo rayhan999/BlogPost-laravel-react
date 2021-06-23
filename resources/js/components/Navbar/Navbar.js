@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { UserContext } from '../Example';
 import './Navbar.css';
 
@@ -11,10 +12,14 @@ const Navbar = () => {
             setNavActive(true);
         } else { setNavActive(false); }
     }
+    const handleLogout = () => {
+        Cookies.remove('uname');
+        setLoggedInUser({})
+    }
     window.addEventListener('scroll', changeNavBG);
     return (
-        <nav className= "navbar navbar-expand-lg bg-primary fixed-top"  >
-            <h1 class="navbar-brand " style={{ fontWeight: 'bold' }} >TechNext</h1>
+        <nav className= "navbar navbar-expand-lg bg-primary "  >
+            <h1 className="navbar-brand " style={{ fontWeight: 'bold' }} >TechNext</h1>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon float-end"></span>
             </button>
@@ -25,7 +30,7 @@ const Navbar = () => {
                        <NavLink className="nav-link mr-5 " to="/posts">Posts </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link mr-5" to="/about">About Us</NavLink>
+                        <NavLink className="nav-link mr-5" to="/myposts">My Posts</NavLink>
                     </li>
                     
                     <li className="nav-item">
@@ -37,16 +42,16 @@ const Navbar = () => {
                     <li className="nav-item">
                         <NavLink className="nav-link mr-5  " to="/contact">Contact Us</NavLink>
                     </li>
-                    {/* {loggedInUser.isSignedIn ?
-                        <li class="nav-item login" style={{ fontWeight: 'bold' }} >
-                            <span class="nav-link  userName" style={{ cursor: 'default', fontWeight: 'bold', color: 'white' }} onClick={() => setLoggedInUser({})}>{loggedInUser.name}</span>
+                    {loggedInUser ?
+                        <li className="nav-item login" style={{ fontWeight: 'bold' }} >
+                            <span className="nav-link  userName" style={{ cursor: 'default', fontWeight: 'bold', color: 'white' }} onClick={handleLogout}>{loggedInUser}</span>
                         </li>
-                        : */}
+                        :
 
-                        <li class="nav-item ">
-                            <Link class="nav-link  " style={{ color: 'white' }} to="/login">Login</Link>
+                        <li className="nav-item ">
+                            <Link className="nav-link  " style={{ color: 'white' }} to="/login">Login</Link>
                         </li>
-                    {/* } */}
+                     } 
                 </ul>
             </div>
         </nav>

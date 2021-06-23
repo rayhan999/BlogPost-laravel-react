@@ -1,20 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        //
+        error_log("------------------------------------");
+
+        $value = $req->cookie('uname');
+        $myposts = Post::where('creator', $value)->get();
+        return $myposts;
     }
 
     /**
@@ -33,10 +37,9 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function verify(Request $request)
+    public function store(Request $request)
     {
-        // dd(true);
-        return true;
+        //
     }
 
     /**

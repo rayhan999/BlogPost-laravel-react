@@ -41,7 +41,7 @@ class loginController extends Controller
             ->where('password', $req->password)
             ->get();
         if (count($user) > 0) {
-            // $req->session()->put('uname', $user[0]['uname']);
+            $req->session()->put('uname', $user[0]['uname']);
             return true;
         } else {
             return false;

@@ -34,7 +34,7 @@ const Login = () => {
             .then(res =>{
                 if(res.data){
                     Cookies.set('uname', eventDdata.uname);
-
+                    setLoggedInUser(eventDdata.uname);
                     history.replace(from);
                     // console.log("data",res.data);
                 }else{
@@ -55,12 +55,12 @@ const Login = () => {
                     // console.log("data",res.data);
                 }else{
                     setSignUpFailed(true);
-                    // console.log("fals");
+                    console.log("fals");
                 }
             })
                 .catch(error => {
                     setSignUpFailed(true);
-                // console.log(error.message);
+                console.log(error.message);
             })
         }
     }

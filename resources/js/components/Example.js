@@ -12,6 +12,7 @@ import Login from "./Login/Login.js"
 import Posts from './Posts/Posts.js';
 import PrivateRoute from './PrivateRoute/PrivateRoute.js';
 import LoginRoute from './PrivateRoute/LoginRoute.js';
+import Myposts from './Myposts/Myposts.js';
 
 export const UserContext = createContext();
 function Example() {
@@ -23,14 +24,14 @@ function Example() {
         if(uname) {setLoggedInUser(uname);}
     },[Cookies.get('uname')]);
     return (
-        <div className="container">
+        <div className="">
             <UserContext.Provider value={[loggedInUser, setLoggedInUser]} className="container">
                 {/* <h3>email: {loggedInUser.email}</h3> */}
                 <Router>
 
                     <Switch>
-                        <Route exact path="/">
-                            <Navbar></Navbar>
+                        <Route exact path="/posts">
+                        <Posts></Posts>
                         </Route>
                         {/* <PrivateRoute path="/dashboard/:panel">
               <Dashboard adminLoading={adminLoading} />
@@ -38,8 +39,8 @@ function Example() {
                         <Route path="/login">
                             <Login />
                         </Route>
-                        <PrivateRoute path="/posts">
-                            <Posts></Posts>
+                        <PrivateRoute path="/myposts">
+                            <Myposts></Myposts>
                         </PrivateRoute>
                     </Switch>
 
