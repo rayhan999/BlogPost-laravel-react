@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class MyPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,7 @@ class PostController extends Controller
         error_log("------------------------------------");
 
         $value = $req->cookie('uname');
-        $myposts = Post::all();
-        error_log($myposts);
+        $myposts = Post::where('creator', $value)->get();
         return $myposts;
     }
 

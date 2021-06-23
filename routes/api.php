@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\MyPostController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,5 @@ use Illuminate\Support\Facades\Route;
 Route::post('logincheck', [loginController::class, 'verify']);
 Route::post('register', [loginController::class, 'register']);
 
-Route::get('myposts', [PostController::class, 'index']);
+Route::get('posts', [PostController::class, 'index']);
+Route::get('myposts', [MyPostController::class, 'index']);
