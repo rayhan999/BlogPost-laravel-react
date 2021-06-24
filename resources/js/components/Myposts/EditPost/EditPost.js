@@ -5,6 +5,7 @@ import Navbar from '../../Navbar/Navbar';
 
 const EditPost = () => {
     const { id } = useParams();
+    let history = useHistory();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [postData, setPostData] = useState();
     useEffect(() => {
@@ -16,7 +17,21 @@ const EditPost = () => {
             })
             .catch(error => console.log(error.message))
     }, []);
-    const onSubmit = data => {}
+    const onSubmit = data => {
+        axios.post(`http://localhost:8000/api/myposts/edit/${id}`, data)
+
+            .then(res => {
+                if (res) {
+                    console.log("data", res);
+                    history.replace("/myposts");
+                } else {
+                    console.log("fals");
+                }
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+    }
     return (
         <div>
             <Navbar></Navbar>

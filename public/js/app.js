@@ -15706,6 +15706,8 @@ var EditPost = function EditPost() {
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useParams)(),
       id = _useParams.id;
 
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useHistory)();
+
   var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_1__.useForm)(),
       register = _useForm.register,
       handleSubmit = _useForm.handleSubmit,
@@ -15725,7 +15727,18 @@ var EditPost = function EditPost() {
     });
   }, []);
 
-  var onSubmit = function onSubmit(data) {};
+  var onSubmit = function onSubmit(data) {
+    axios.post("http://localhost:8000/api/myposts/edit/".concat(id), data).then(function (res) {
+      if (res) {
+        console.log("data", res);
+        history.replace("/myposts");
+      } else {
+        console.log("fals");
+      }
+    })["catch"](function (error) {
+      console.log(error.message);
+    });
+  };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Navbar_Navbar__WEBPACK_IMPORTED_MODULE_2__.default, {}), postData && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {

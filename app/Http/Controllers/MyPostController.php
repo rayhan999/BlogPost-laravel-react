@@ -39,17 +39,6 @@ class MyPostController extends Controller
     public function store(Request $req)
     {
         $value = $req->cookie('uname');
-        // $post_create = array();
-        // $post_create['title'] = $req->title;
-        // $post_create['description'] = $req->description;
-        // $post_create['creator'] = $value;
-        // $post = DB::table('posts')->insert($post_create);
-        // if ($post) {
-        //     // error_log($user);
-        //     return true;
-        // } else {
-        //     return false;
-        // }
         $post = new Post();
         $post->title = $req->title;
         $post->description = $req->description;
@@ -94,9 +83,21 @@ class MyPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
-        //
+        $value = $req->cookie('uname');
+        $post = Post::find($id);
+        error_log("------------------------------------");
+        error_log($post);
+        $post->title = $req->title;
+        $post->description = $req->description;
+        $post->creator = $value;
+        $post->save();
+        if ($post) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

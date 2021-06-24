@@ -28,3 +28,4 @@ Route::get('myposts', [MyPostController::class, 'index']);
 Route::post('addpost', [MyPostController::class, 'store']);
 Route::delete('myposts/delete/{id}', [MyPostController::class, 'destroy']);
 Route::get('myposts/edit/{id}', [MyPostController::class, 'edit']);
+Route::post('myposts/edit/{id}', [MyPostController::class, 'update']);
