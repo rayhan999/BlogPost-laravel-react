@@ -14,7 +14,6 @@ class MyPostController extends Controller
      */
     public function index(Request $req)
     {
-        error_log("------------------------------------");
 
         $value = $req->cookie('uname');
         $myposts = Post::where('creator', $value)->get();
@@ -82,7 +81,10 @@ class MyPostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $editPost = Post::where('id', $id)->get();
+        // error_log("------------------------------------");
+        // error_log($id);
+        return $editPost;
     }
 
     /**
@@ -105,6 +107,13 @@ class MyPostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // error_log("------------------------------------");
+        // error_log($id);
+        $deletePost = Post::where('id', $id)->delete();
+        if ($deletePost) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

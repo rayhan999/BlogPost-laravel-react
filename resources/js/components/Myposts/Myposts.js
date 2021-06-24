@@ -6,16 +6,34 @@ import Navbar from '../Navbar/Navbar';
 
 const Myposts = () => {
     const [myPosts, setMyposts] = useState();
+    const [mount, setMount] = useState(true);
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     useEffect(() => {
         axios.get(`http://localhost:8000/api/myposts`)
             .then(res => {
                 setMyposts(res.data);
-                console.log("cookie", res.data);
+                // console.log("cookie", res.data);
 
             })
             .catch(error => console.log(error.message))
-    }, []);
+    }, [mount]);
+    const handleDelete = (id) => {
+        console.log(id);
+        axios.delete(`http://localhost:8000/api/myposts/delete/${id}`)
+                    .then(res => {
+                        if (res.data) {
+                            // setServices(removedServices)
+                           console.log("success");
+                           setMount(!mount);
+                        }else{
+                            console.log("false");
+                        }
+                        
+                    })
+                    .catch(err => {
+                        console.log(err.message)
+                    })
+    }
     return (
         <div>
             <Navbar></Navbar>
@@ -44,8 +62,8 @@ const Myposts = () => {
                                             <td>{post.title}</td>
                                             <td>{post.description.slice(0,50)}...</td>
                                             <td>
-                                                <button className="btn btn-outline-success m-2">Edit</button>
-                                                <button className="btn btn-outline-danger m-2">Delete</button>
+                                                <Link to={`/myposts/edit/${post.id}`} className="btn btn-outline-success m-2">Edit</Link>
+                                                <button className="btn btn-outline-danger m-2" onClick={()=>handleDelete(post.id)}>Delete</button>
                                             </td>
                                         </tr>
                                     )
