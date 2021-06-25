@@ -15,16 +15,17 @@ import LoginRoute from './PrivateRoute/LoginRoute.js';
 import Myposts from './Myposts/Myposts.js';
 import AddPost from './Myposts/AddPost/AddPost.js';
 import EditPost from './Myposts/EditPost/EditPost.js';
+import PostDetails from './Posts/PostDetails/PostDetails.js';
 
 export const UserContext = createContext();
 function Example() {
-    
+
     const [loggedInUser, setLoggedInUser] = useState(null);
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         const uname = Cookies.get('uname');
-        if(uname) {setLoggedInUser(uname);}
-    },[Cookies.get('uname')]);
+        if (uname) { setLoggedInUser(uname); }
+    }, [Cookies.get('uname')]);
     return (
         <div className="mb-5">
             <UserContext.Provider value={[loggedInUser, setLoggedInUser]} className="container">
@@ -33,7 +34,10 @@ function Example() {
 
                     <Switch>
                         <Route exact path="/posts">
-                        <Posts></Posts>
+                            <Posts></Posts>
+                        </Route>
+                        <Route path="/posts/:id">
+                            <PostDetails></PostDetails>
                         </Route>
                         <Route path="/login">
                             <Login />

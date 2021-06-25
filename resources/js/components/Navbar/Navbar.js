@@ -14,7 +14,7 @@ const Navbar = () => {
     }
     const handleLogout = () => {
         Cookies.remove('uname');
-        setLoggedInUser({})
+        setLoggedInUser(null);
     }
     window.addEventListener('scroll', changeNavBG);
     return (

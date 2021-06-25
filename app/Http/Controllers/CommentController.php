@@ -2,24 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $req)
+    public function index()
     {
-        // error_log("------------------------------------");
-
-        $value = $req->cookie('uname');
-        $myposts = Post::all();
-        // error_log($myposts);
-        return $myposts;
+        //
     }
 
     /**
@@ -38,9 +33,20 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        // error_log("----------------------------");
+        // error_log($req);
+        $comment_value = new Comment();
+        $comment_value->post_id = $req->post_id;
+        $comment_value->comment = $req->comment;
+        $comment_value->commentator = $req->commentator;
+        $comment_value->save();
+        if ($comment_value) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -51,10 +57,10 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $postDetails = Post::where('id', $id)->get();
+        $commentDetails = Comment::where('post_id', $id)->get();
         // error_log("------------------------------------");
         // error_log($postDetails);
-        return $postDetails;
+        return $commentDetails;
     }
 
     /**

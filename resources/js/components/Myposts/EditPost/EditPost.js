@@ -16,7 +16,7 @@ const EditPost = () => {
 
             })
             .catch(error => console.log(error.message))
-    }, []);
+    }, [id]);
     const onSubmit = data => {
         axios.post(`http://localhost:8000/api/myposts/edit/${id}`, data)
 
