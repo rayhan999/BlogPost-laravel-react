@@ -4,6 +4,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\MyPostController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,3 +36,5 @@ Route::get('posts/{id}', [PostController::class, 'show']);
 
 Route::post('posts/addcomment', [CommentController::class, 'store']);
 Route::get('posts/comments/{id}', [CommentController::class, 'show']);
+
+Route::get('/users', [UserController::class, 'index']);

@@ -16,6 +16,7 @@ import Myposts from './Myposts/Myposts.js';
 import AddPost from './Myposts/AddPost/AddPost.js';
 import EditPost from './Myposts/EditPost/EditPost.js';
 import PostDetails from './Posts/PostDetails/PostDetails.js';
+import UserList from './UserList/UserList.js';
 
 export const UserContext = createContext();
 function Example() {
@@ -50,6 +51,9 @@ function Example() {
                         </PrivateRoute>
                         <PrivateRoute path="/myposts/edit/:id">
                             <EditPost></EditPost>
+                        </PrivateRoute>
+                        <PrivateRoute path="/users">
+                            <UserList></UserList>
                         </PrivateRoute>
                     </Switch>
 

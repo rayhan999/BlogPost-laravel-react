@@ -12,6 +12,7 @@ const PostDetails = () => {
     const [details, setDetails] = useState();
     const [comments, setComments] = useState();
     const [mount, setMount] = useState(true);
+    const [hover, setHover] = useState(false);
     useEffect(() => {
         axios.get(`http://localhost:8000/api/posts/${id}`)
             .then(res => {
@@ -27,9 +28,9 @@ const PostDetails = () => {
 
             })
             .catch(error => console.log(error.message))
-    }, [id,mount]);
+    }, [id, mount]);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = (data , e) => {
+    const onSubmit = (data, e) => {
         const commentValue = {
             commentator: Cookies.get('uname'),
             comment: data.comment,
@@ -68,9 +69,26 @@ const PostDetails = () => {
                 }
                 {
                     details && comments && comments.map((comment) =>
-                        <div key={comment.id} className="card mb-2 pl-5">
-                            <h4>{comment.commentator}</h4>
-                            <p>{comment.comment}</p>
+                        <div className="card  mb-2 "
+                        // onMouseEnter={() => setHover(true)}
+                        // onMouseLeave={() => setHover(false)}
+                        >
+                            <div className="d-flex justify-content-between pl-5 pr-5">
+                                <div key={comment.id} className="">
+                                    <h4>{comment.commentator}</h4>
+                                    <p>{comment.comment}</p>
+                                </div>
+
+                                <div className="">
+                                    {loggedInUser === comment.commentator && 
+                                    // hover &&
+                                    <>
+                                    <button className="btn btn-success">Edit</button>
+                                    <button className="btn btn-danger">Delete</button>
+                                    </>
+                                    }
+                                </div>
+                            </div>
                         </div>
                     )
                 }

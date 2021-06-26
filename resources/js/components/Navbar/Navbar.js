@@ -34,14 +34,9 @@ const Navbar = () => {
                     </li>
                     
                     <li className="nav-item">
-                        <NavLink className="nav-link mr-5  " to="/review">Reviews</NavLink>
+                        <NavLink className="nav-link mr-5  " to="/users">Users</NavLink>
                     </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link mr-5  " to="/admin">Admin</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link mr-5  " to="/contact">Contact Us</NavLink>
-                    </li>
+                   
                     {loggedInUser ?
                         <li className="nav-item login" style={{ fontWeight: 'bold' }} >
                             <span className="nav-link  userName" style={{ cursor: 'default', fontWeight: 'bold', color: 'white' }} onClick={handleLogout}>{loggedInUser}</span>
