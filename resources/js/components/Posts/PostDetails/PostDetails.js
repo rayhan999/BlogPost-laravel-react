@@ -17,14 +17,14 @@ const PostDetails = () => {
         axios.get(`/api/posts/${id}`)
             .then(res => {
                 setDetails(res.data[0]);
-                // console.log("details", res.data);
+                // // console.log("details", res.data);
 
             })
             .catch(error => console.log(error.message));
         axios.get(`/api/posts/comments/${id}`)
             .then(res => {
                 setComments(res.data);
-                console.log("comm", res.data);
+                // console.log("comm", res.data);
 
             })
             .catch(error => console.log(error.message))
@@ -36,20 +36,20 @@ const PostDetails = () => {
             comment: data.comment,
             post_id: details.id
         }
-        console.log("commnet", commentValue);
+        // console.log("commnet", commentValue);
         axios.post('/api/posts/addcomment', commentValue)
 
             .then(res => {
                 if (res) {
-                    console.log("data", res);
+                    // console.log("data", res);
                     setMount(!mount);
                     e.target.reset();
                 } else {
-                    console.log("fals");
+                    // console.log("fals");
                 }
             })
             .catch(error => {
-                console.log(error.message);
+                // console.log(error.message);
             })
     }
     return (

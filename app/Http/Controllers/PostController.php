@@ -57,6 +57,14 @@ class PostController extends Controller
         return $postDetails;
     }
 
+    public function userposts($uname)
+    {
+        $posts = Post::where('creator', $uname)->get();
+        error_log("------------------------------------");
+        error_log($posts);
+        return $posts;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

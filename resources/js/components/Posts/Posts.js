@@ -9,15 +9,15 @@ const Posts = () => {
         axios.get(`/api/posts`)
             .then(res => {
                 setPosts(res.data);
-                // console.log("cookie", res.data);
+                // // console.log("cookie", res.data);
 
             })
             .catch(error => console.log(error.message))
     }, []);
     const handleLoadMore = () => {
         setVisible(oldValue=> oldValue + 10);
-        console.log(posts.length);
-        console.log(visible);
+        // console.log(posts.length);
+        // console.log(visible);
     }
     return (
         <div>

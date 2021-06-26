@@ -25,14 +25,14 @@ Route::post('/logincheck', [loginController::class, 'verify']);
 Route::post('register', [loginController::class, 'register']);
 
 Route::get('posts', [PostController::class, 'index']);
-Route::get('myposts', [MyPostController::class, 'index']);
+Route::get('posts/{id}', [PostController::class, 'show']);
+Route::get('/users/posts/{uname}', [PostController::class, 'userposts']);
 
+Route::get('myposts', [MyPostController::class, 'index']);
 Route::post('addpost', [MyPostController::class, 'store']);
 Route::delete('myposts/delete/{id}', [MyPostController::class, 'destroy']);
 Route::get('myposts/edit/{id}', [MyPostController::class, 'edit']);
 Route::post('myposts/edit/{id}', [MyPostController::class, 'update']);
-
-Route::get('posts/{id}', [PostController::class, 'show']);
 
 Route::post('posts/addcomment', [CommentController::class, 'store']);
 Route::get('posts/comments/{id}', [CommentController::class, 'show']);

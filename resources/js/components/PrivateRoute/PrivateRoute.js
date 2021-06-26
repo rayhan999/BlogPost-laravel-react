@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 
 const PrivateRoute = ({ children, ...rest }) => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    console.log("privateRoute",loggedInUser);
+    // console.log("privateRoute",loggedInUser);
     return (
         <Route
             {...rest}

@@ -12,7 +12,7 @@ const EditPost = () => {
         axios.get(`/api/myposts/edit/${id}`)
             .then(res => {
                 setPostData(res.data[0]);
-                // console.log("postdata", res);
+                // // console.log("postdata", res);
 
             })
             .catch(error => console.log(error.message))
@@ -22,14 +22,14 @@ const EditPost = () => {
 
             .then(res => {
                 if (res) {
-                    console.log("data", res);
+                    // console.log("data", res);
                     history.replace("/myposts");
                 } else {
-                    console.log("fals");
+                    // console.log("fals");
                 }
             })
             .catch(error => {
-                console.log(error.message);
+                // console.log(error.message);
             })
     }
     return (

@@ -7,19 +7,19 @@ const AddPost = () => {
     let history = useHistory();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
-        console.log(data);
+        // console.log(data);
         axios.post('/api/addpost', data)
 
             .then(res => {
                 if (res) {
-                    console.log("data", res);
+                    // console.log("data", res);
                     history.replace("/myposts");
                 } else {
-                    console.log("fals");
+                    // console.log("fals");
                 }
             })
             .catch(error => {
-                console.log(error.message);
+                // console.log(error.message);
             })
     }
     return (

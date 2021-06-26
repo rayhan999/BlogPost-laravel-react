@@ -12,26 +12,26 @@ const Myposts = () => {
         axios.get(`/api/myposts`)
             .then(res => {
                 setMyposts(res.data);
-                // console.log("cookie", res.data);
+                // // console.log("cookie", res.data);
 
             })
             .catch(error => console.log(error.message))
     }, [mount]);
     const handleDelete = (id) => {
-        console.log(id);
+        // console.log(id);
         axios.delete(`/api/myposts/delete/${id}`)
                     .then(res => {
                         if (res.data) {
                             // setServices(removedServices)
-                           console.log("success");
+                           // console.log("success");
                            setMount(!mount);
                         }else{
-                            console.log("false");
+                            // console.log("false");
                         }
                         
                     })
                     .catch(err => {
-                        console.log(err.message)
+                        // console.log(err.message)
                     })
     }
     return (

@@ -27,7 +27,7 @@ const Login = () => {
     const location = useLocation();
     let { from } = location.state || { from: { pathname: "/posts" } };
     const onSubmit = eventDdata => {
-        console.log(eventDdata);
+        // console.log(eventDdata);
         if (!newUser) {
             axios.post('/api/logincheck', eventDdata)
 
@@ -36,15 +36,15 @@ const Login = () => {
                         Cookies.set('uname', eventDdata.uname);
                         setLoggedInUser(eventDdata.uname);
                         history.replace(from);
-                        // console.log("data",res.data);
+                        // // console.log("data",res.data);
                     } else {
                         setLoginFailed(true);
-                        // console.log("fals");
+                        // // console.log("fals");
                     }
                 })
                 .catch(error => {
                     setLoginFailed(true);
-                    // console.log(error.message);
+                    // // console.log(error.message);
                 })
         } else {
             axios.post('/api/register', eventDdata)
@@ -52,20 +52,20 @@ const Login = () => {
                 .then(res => {
                     if (res.data) {
                         setSignup(!signup);
-                        // console.log("data",res.data);
+                        // // console.log("data",res.data);
                     } else {
                         setSignUpFailed(true);
-                        console.log("fals");
+                        // console.log("fals");
                     }
                 })
                 .catch(error => {
                     setSignUpFailed(true);
-                    console.log(error.message);
+                    // console.log(error.message);
                 })
         }
     }
     const handlePassShow = () => {
-        // console.log("asd");
+        // // console.log("asd");
         setSeePassword(!seePassword);
     }
     return (

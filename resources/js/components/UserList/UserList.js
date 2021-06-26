@@ -34,7 +34,7 @@ const UserList = () => {
                 .then(json => {
                     // hideLoader();
                     setComments(json);
-                    console.log(json);
+                    // console.log(json);
                 });
         };
 
@@ -55,7 +55,7 @@ const UserList = () => {
     }, [totalItems, ItemsPerPage, currentPage, search]);
     const commentsData = useMemo(() => {
         let computedComments = comments;
-        // console.log("search", search,computedComments);
+        // // console.log("search", search,computedComments);
         if (search && computedComments) {
             computedComments = computedComments.filter(
                 comment =>
@@ -121,7 +121,7 @@ const UserList = () => {
         setSorting({ field, order })
     };
 
-    console.log("users", comments);
+    // console.log("users", comments);
     return (
         <div>
             <Navbar></Navbar>
@@ -134,7 +134,7 @@ const UserList = () => {
                                 <span>Show </span>
                                 <select
                                     className="btn btn-secondary"
-                                    defaultValue={ItemsPerPage}
+                                    
                                     onChange={e => setItemsPerPage(e.target.value)}
                                 >
                                     <option value={ItemsPerPage} selected disabled hidden>{ItemsPerPage}</option>
