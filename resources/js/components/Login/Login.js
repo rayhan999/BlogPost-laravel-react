@@ -29,7 +29,7 @@ const Login = () => {
     const onSubmit = eventDdata => {
         console.log(eventDdata);
         if (!newUser) {
-            axios.post('http://localhost:8000/api/logincheck', eventDdata)
+            axios.post('/api/logincheck', eventDdata)
 
                 .then(res => {
                     if (res.data) {
@@ -47,7 +47,7 @@ const Login = () => {
                     // console.log(error.message);
                 })
         } else {
-            axios.post('http://localhost:8000/api/register', eventDdata)
+            axios.post('/api/register', eventDdata)
 
                 .then(res => {
                     if (res.data) {

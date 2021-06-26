@@ -9,7 +9,7 @@ const Myposts = () => {
     const [mount, setMount] = useState(true);
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/myposts`)
+        axios.get(`/api/myposts`)
             .then(res => {
                 setMyposts(res.data);
                 // console.log("cookie", res.data);
@@ -19,7 +19,7 @@ const Myposts = () => {
     }, [mount]);
     const handleDelete = (id) => {
         console.log(id);
-        axios.delete(`http://localhost:8000/api/myposts/delete/${id}`)
+        axios.delete(`/api/myposts/delete/${id}`)
                     .then(res => {
                         if (res.data) {
                             // setServices(removedServices)

@@ -9,7 +9,7 @@ const EditPost = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [postData, setPostData] = useState();
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/myposts/edit/${id}`)
+        axios.get(`/api/myposts/edit/${id}`)
             .then(res => {
                 setPostData(res.data[0]);
                 // console.log("postdata", res);
@@ -18,7 +18,7 @@ const EditPost = () => {
             .catch(error => console.log(error.message))
     }, [id]);
     const onSubmit = data => {
-        axios.post(`http://localhost:8000/api/myposts/edit/${id}`, data)
+        axios.post(`/api/myposts/edit/${id}`, data)
 
             .then(res => {
                 if (res) {

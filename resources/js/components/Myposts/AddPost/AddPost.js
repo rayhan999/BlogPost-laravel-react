@@ -8,7 +8,7 @@ const AddPost = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data);
-        axios.post('http://localhost:8000/api/addpost', data)
+        axios.post('/api/addpost', data)
 
             .then(res => {
                 if (res) {

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useMemo } from "react";
 import PaginationComponent from "react-bootstrap/Pagination";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSortAmountDown, faSortAmountUp } from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../Navbar/Navbar';
 
 
@@ -8,8 +10,8 @@ const UserList = () => {
     const [comments, setComments] = useState([]);
     // const [loader, showLoader, hideLoader] = useFullPageLoader();
     const [totalItems, setTotalItems] = useState(0);
-    const [currentPage, setCurrentPage] = useState(localStorage.getItem('currentPage') ||1);
-    const [search, setSearch] = useState(localStorage.getItem('search') ||"");
+    const [currentPage, setCurrentPage] = useState(localStorage.getItem('currentPage') || 1);
+    const [search, setSearch] = useState(localStorage.getItem('search') || "");
     const [sorting, setSorting] = useState({ field: "", order: "" });
     const [ItemsPerPage, setItemsPerPage] = useState(localStorage.getItem('ItemsPerPage') || 5);
     const [totalPages, setTotalPages] = useState(0);
@@ -17,17 +19,17 @@ const UserList = () => {
     // const ItemsPerPage = 2;
 
     const headers = [
-        { name: "No#", field: "id", sortable: false },
-        { name: "Name", field: "uname", sortable: true },
+        { name: "ID", field: "id", sortable: false },
+        { name: "User Name", field: "uname", sortable: true },
         { name: "Email", field: "email", sortable: true },
-        { name: "Comment", field: "website", sortable: false }
+        { name: "Website", field: "website", sortable: false }
     ];
 
     useEffect(() => {
         const getData = () => {
             // showLoader();
 
-            fetch("http://localhost:8000/api/users")
+            fetch("/api/users")
                 .then(response => response.json())
                 .then(json => {
                     // hideLoader();
@@ -37,19 +39,20 @@ const UserList = () => {
         };
 
         getData();
-        // axios.get(`http://localhost:8000/api/users`)
+        // axios.get(`/api/users`)
         //     .then(res => {
         //         setUsers(res.data);
 
 
         //     })
         //     .catch(error => console.log(error.message))
-        if (totalItems > 0 && ItemsPerPage > 0){
-            setTotalPages(Math.ceil(totalItems / ItemsPerPage));}
-            localStorage.setItem('ItemsPerPage', ItemsPerPage);
-            localStorage.setItem('currentPage', currentPage);
-            localStorage.setItem('search', search);
-    }, [totalItems, ItemsPerPage,currentPage,search]);
+        if (totalItems > 0 && ItemsPerPage > 0) {
+            setTotalPages(Math.ceil(totalItems / ItemsPerPage));
+        }
+        localStorage.setItem('ItemsPerPage', ItemsPerPage);
+        localStorage.setItem('currentPage', currentPage);
+        localStorage.setItem('search', search);
+    }, [totalItems, ItemsPerPage, currentPage, search]);
     const commentsData = useMemo(() => {
         let computedComments = comments;
         // console.log("search", search,computedComments);
@@ -57,7 +60,8 @@ const UserList = () => {
             computedComments = computedComments.filter(
                 comment =>
                     comment.uname.toLowerCase().includes(search.toLowerCase()) ||
-                    comment.email.toLowerCase().includes(search.toLowerCase())
+                    comment.email.toLowerCase().includes(search.toLowerCase()) ||
+                    comment.website.toLowerCase().includes(search.toLowerCase())
             );
         }
 
@@ -78,7 +82,7 @@ const UserList = () => {
             (currentPage - 1) * ItemsPerPage + ItemsPerPage
         );
     }, [comments, currentPage, search, sorting, ItemsPerPage]);
-    // const onPageChange= page => {setCurrentPage(page)}
+
     const paginationItems = useMemo(() => {
         const pages = [];
 
@@ -97,7 +101,7 @@ const UserList = () => {
         return pages;
     }, [totalPages, currentPage]);
 
-    
+
     const onInputChange = value => {
         setSearch(value);
         // onSearch(value);
@@ -125,11 +129,11 @@ const UserList = () => {
                 <h1>users</h1>
                 <div className="row w-100">
                     <div className="col mb-3 col-12 text-center">
-                        <div className="row">
-                            <div className="col-md-6">
-
+                        <div className="d-flex justify-content-between mb-3">
+                            <div className="">
+                                <span>Show </span>
                                 <select
-                                    className="btn btn-info"
+                                    className="btn btn-secondary"
                                     defaultValue={ItemsPerPage}
                                     onChange={e => setItemsPerPage(e.target.value)}
                                 >
@@ -139,20 +143,10 @@ const UserList = () => {
                                     <option className="bg-white text-muted">5</option>
                                 </select>
 
+                                <span> Entries</span>
 
-                                <PaginationComponent>
-                                    <PaginationComponent.Prev
-                                        onClick={() => onPageChange(currentPage - 1)}
-                                        disabled={currentPage === 1}
-                                    />
-                                    {paginationItems}
-                                    <PaginationComponent.Next
-                                        onClick={() => onPageChange(currentPage + 1)}
-                                        disabled={currentPage === totalPages}
-                                    />
-                                </PaginationComponent>
                             </div>
-                            <div className="col-md-6 d-flex flex-row-reverse">
+                            <div className="">
 
                                 <input
                                     type="text"
@@ -175,15 +169,16 @@ const UserList = () => {
                                             onClick={() =>
                                                 sortable ? onSortingChange(field) : null
                                             }
+                                            style={{ cursor: "pointer" }}
                                         >
-                                            {name}
+                                            {name} &nbsp;
 
                                             {sortingField && sortingField === field && (
                                                 <FontAwesomeIcon
                                                     icon={
                                                         sortingOrder === "asc"
-                                                            ? "arrow-down"
-                                                            : "arrow-up"
+                                                            ? faSortAmountDown
+                                                            : faSortAmountUp
                                                     }
                                                 />
                                             )}
@@ -197,13 +192,26 @@ const UserList = () => {
                                         <th scope="row" key={comment.id}>
                                             {comment.id}
                                         </th>
-                                        <td>{comment.uname}</td>
+                                        <td><Link to={`users/${comment.id}`} style={{textDecoration:"none", color:"black"}}>{comment.uname}</Link></td>
                                         <td>{comment.email}</td>
-                                        <td>{comment.website}</td>
+                                        <td><a href={`https://`+ comment.website} target="_blank">{comment.website}</a></td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
+                        <div className="d-flex justify-content-end">
+                            <PaginationComponent>
+                                <PaginationComponent.Prev
+                                    onClick={() => setCurrentPage(currentPage - 1)}
+                                    disabled={currentPage === 1}
+                                />
+                                {paginationItems}
+                                <PaginationComponent.Next
+                                    onClick={() => setCurrentPage(currentPage + 1)}
+                                    disabled={currentPage === totalPages}
+                                />
+                            </PaginationComponent>
+                        </div>
                     </div>
                 </div>
             </div>

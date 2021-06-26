@@ -38,3 +38,4 @@ Route::post('posts/addcomment', [CommentController::class, 'store']);
 Route::get('posts/comments/{id}', [CommentController::class, 'show']);
 
 Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/{id}', [UserController::class, 'show']);

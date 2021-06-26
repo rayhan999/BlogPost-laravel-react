@@ -47,7 +47,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $userDetails = User::where('id', $id)->get();
+        // error_log("------------------------------------");
+        // error_log($postDetails);
+        return $userDetails;
     }
 
     /**

@@ -14,14 +14,14 @@ const PostDetails = () => {
     const [mount, setMount] = useState(true);
     const [hover, setHover] = useState(false);
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/posts/${id}`)
+        axios.get(`/api/posts/${id}`)
             .then(res => {
                 setDetails(res.data[0]);
                 // console.log("details", res.data);
 
             })
             .catch(error => console.log(error.message));
-        axios.get(`http://localhost:8000/api/posts/comments/${id}`)
+        axios.get(`/api/posts/comments/${id}`)
             .then(res => {
                 setComments(res.data);
                 console.log("comm", res.data);
@@ -37,7 +37,7 @@ const PostDetails = () => {
             post_id: details.id
         }
         console.log("commnet", commentValue);
-        axios.post('http://localhost:8000/api/posts/addcomment', commentValue)
+        axios.post('/api/posts/addcomment', commentValue)
 
             .then(res => {
                 if (res) {

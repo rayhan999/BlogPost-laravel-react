@@ -6,7 +6,7 @@ const Posts = () => {
     const [posts, setPosts] = useState([]);
     const [visible, setVisible] = useState(10);
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/posts`)
+        axios.get(`/api/posts`)
             .then(res => {
                 setPosts(res.data);
                 // console.log("cookie", res.data);
