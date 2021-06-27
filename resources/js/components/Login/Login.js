@@ -123,6 +123,11 @@ const Login = () => {
 
                                 <p><FontAwesomeIcon icon={faKey}></FontAwesomeIcon></p>
                             </div>
+                            <div className="input-group with-icon icon-left">
+                                <input className="form-control rounded" placeholder="Website" {...registerSignUp("website", { required: true })} type="text" />
+
+                                <p><FontAwesomeIcon icon={faKey}></FontAwesomeIcon></p>
+                            </div>
                             {
                                 signUpFailed &&
                                 <div className="alert text-danger  fade show" role="alert">

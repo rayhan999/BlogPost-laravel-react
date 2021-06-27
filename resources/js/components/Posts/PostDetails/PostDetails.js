@@ -74,12 +74,12 @@ const PostDetails = () => {
                 }
                 {
                     details && comments && comments.slice(0, visible).map((comment) =>
-                        <div className="card  mb-2 "
+                        <div className="card  mb-2 " key={comment.id}
                         // onMouseEnter={() => setHover(true)}
                         // onMouseLeave={() => setHover(false)}
                         >
                             <div className="d-flex justify-content-between pl-5 pr-5">
-                                <div key={comment.id} className="">
+                                <div  className="">
                                     <h4>{comment.commentator}</h4>
                                     <p>{comment.comment}</p>
                                 </div>

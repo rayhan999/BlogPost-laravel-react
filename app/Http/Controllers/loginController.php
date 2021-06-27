@@ -54,6 +54,7 @@ class loginController extends Controller
         $user_create['uname'] = $req->uname;
         $user_create['email'] = $req->email;
         $user_create['password'] = $req->password;
+        $user_create['website'] = $req->website;
         $user = DB::table('users')->insert($user_create);
         if ($user) {
             // error_log($user);

@@ -15537,6 +15537,20 @@ var Login = function Login() {
                   icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__.faKey
                 })
               })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              className: "input-group with-icon icon-left",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", _objectSpread(_objectSpread({
+                className: "form-control rounded",
+                placeholder: "Website"
+              }, registerSignUp("website", {
+                required: true
+              })), {}, {
+                type: "text"
+              })), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__.FontAwesomeIcon, {
+                  icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__.faKey
+                })
+              })]
             }), signUpFailed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "alert text-danger  fade show",
               role: "alert",
@@ -16224,9 +16238,7 @@ var PostDetails = function PostDetails() {
         })]
       }), details && comments && comments.slice(0, visible).map(function (comment) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-          className: "card  mb-2 " // onMouseEnter={() => setHover(true)}
-          // onMouseLeave={() => setHover(false)}
-          ,
+          className: "card  mb-2 ",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "d-flex justify-content-between pl-5 pr-5",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -16236,7 +16248,7 @@ var PostDetails = function PostDetails() {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
                 children: comment.comment
               })]
-            }, comment.id), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               className: "d-flex align-items-center",
               children: loggedInUser === comment.commentator &&
               /*#__PURE__*/
@@ -16252,7 +16264,7 @@ var PostDetails = function PostDetails() {
               })
             })]
           })
-        });
+        }, comment.id);
       }), comments && comments.length > visible && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
         className: "btn btn-primary ",
         onClick: handleLoadMore,
