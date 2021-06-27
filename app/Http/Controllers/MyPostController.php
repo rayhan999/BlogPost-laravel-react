@@ -38,17 +38,45 @@ class MyPostController extends Controller
      */
     public function store(Request $req)
     {
-        $value = $req->cookie('uname');
-        $post = new Post();
-        $post->title = $req->title;
-        $post->description = $req->description;
-        $post->creator = $value;
-        $post->save();
-        if ($post) {
-            return true;
+
+        $image = $req->file('image');
+        if ($image) {
+            $image_name = date('dmy_H_s_i');
+            $image_ext = strtolower($image->getClientOriginalExtension());
+            $image_fullname = $image_name . '.' . $image_ext;
+            $upload_path = 'assets/uploads/';
+            $image_url = $upload_path . $image_fullname;
+            $image_move = $image->move($upload_path, $image_fullname);
+            if ($image_move) {
+                $value = $req->cookie('uname');
+                $post = new Post();
+                $post->title = $req->title;
+                $post->description = $req->description;
+                $post->creator = $value;
+                $post->image = $image_url;
+                error_log("------------------------------------");
+                error_log($post);
+                $post->save();
+                if ($post) {
+                    return true;
+                } else {
+                    //     return false;
+                    error_log("------------------------------------");
+                    error_log("Not updated");
+                }
+            } else {
+                //     return false;
+                error_log("------------------------------------");
+                error_log("image not move");
+            }
         } else {
-            return false;
+            //     return false;
+
+            error_log("------------------------------------");
+            error_log("image not found");
         }
+        // $post->save();
+
     }
 
     /**

@@ -15,7 +15,7 @@ const Posts = () => {
             .catch(error => console.log(error.message))
     }, []);
     const handleLoadMore = () => {
-        setVisible(oldValue=> oldValue + 10);
+        setVisible(oldValue => oldValue + 10);
     }
     return (
         <div>
@@ -27,26 +27,31 @@ const Posts = () => {
                 </div>
                 <div className="">
                     {posts &&
-                        posts.slice(0,visible).map(post => {
+                        posts.slice(0, visible).map(post => {
                             return (
-
-                                <div className="card mb-4" key={post.id}>
+                                <div className="card mb-3 " key={post.id}>
+                                <div className="row no-gutters">
+                                  <div className="col-md-4">
+                                    <img src={post.image} className="img-fluid" alt="..." width="90%" />
+                                  </div>
+                                  <div className="col-md-8">
                                     <div className="card-body">
-                                        <h5 className="card-title">{post.title}</h5>
-                                        <h6 className="card-subtitle mb-2 text-muted">{post.creator}</h6>
-                                        <p className="card-text">{post.description.slice(0, 100)}...</p>
-                                        <Link to={`/posts/${post.id}`} className="btn btn-info card-link">Details</Link>
-                                        {/* <a href="#" className="card-link">Another link</a> */}
+                                      <h5 className="card-title">{post.title}</h5>
+                                      <h6 className="card-subtitle mb-2 text-muted">{post.creator}</h6>
+                                         <p className="card-text">{post.description.slice(0, 100)}...</p>
+                                         <Link to={`/posts/${post.id}`} className="btn btn-info card-link">Details</Link>
                                     </div>
+                                  </div>
                                 </div>
+                              </div>
                             )
                         })
                     }
                     {
                         posts.length > visible &&
-                    
-                    <button className="btn btn-primary btn-block" onClick={handleLoadMore}>Load More</button>
-                }
+
+                        <button className="btn btn-primary btn-block" onClick={handleLoadMore}>Load More</button>
+                    }
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import { useForm } from "react-hook-form";
 import { UserContext } from '../../Example';
 import Navbar from '../../Navbar/Navbar';
+import { post } from 'jquery';
 
 const PostDetails = () => {
     const { id } = useParams();
@@ -18,7 +19,7 @@ const PostDetails = () => {
         axios.get(`/api/posts/${id}`)
             .then(res => {
                 setDetails(res.data[0]);
-                // // console.log("details", res.data);
+                console.log("details", res.data);
 
             })
             .catch(error => console.log(error.message));
@@ -60,11 +61,14 @@ const PostDetails = () => {
     return (
         <div>
             <Navbar></Navbar>
+
             <div className="container mt-5">
                 {
                     details &&
                     <>
+                        
                         <div className="">
+                        <img src={`../${details.image}`} alt="a" className="img-fluid" width="100%" style={{height:"60vh"}}/>
                             <h1>{details.title}</h1>
                             <small>{details.creator}</small>
                             <p>{details.description}</p>
@@ -79,7 +83,7 @@ const PostDetails = () => {
                         // onMouseLeave={() => setHover(false)}
                         >
                             <div className="d-flex justify-content-between pl-5 pr-5">
-                                <div  className="">
+                                <div className="">
                                     <h4>{comment.commentator}</h4>
                                     <p>{comment.comment}</p>
                                 </div>
