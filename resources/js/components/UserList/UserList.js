@@ -104,7 +104,6 @@ const UserList = () => {
 
     const onInputChange = value => {
         setSearch(value);
-        // onSearch(value);
         setCurrentPage(1);
     };
 
@@ -134,10 +133,10 @@ const UserList = () => {
                                 <span>Show </span>
                                 <select
                                     className="btn btn-secondary"
-                                    
-                                    onChange={e => setItemsPerPage(e.target.value)}
+                                    defaultValue={ItemsPerPage}
+                                    onChange={e => { setItemsPerPage(e.target.value); setCurrentPage(1); }}
                                 >
-                                    <option value={ItemsPerPage} selected disabled hidden>{ItemsPerPage}</option>
+                                    {/* <option value={ItemsPerPage} selected disabled hidden>{ItemsPerPage}</option> */}
                                     <option className="bg-white text-muted">2</option>
                                     <option className="bg-white text-muted">3</option>
                                     <option className="bg-white text-muted">5</option>
@@ -188,13 +187,13 @@ const UserList = () => {
                             </thead>
                             <tbody>
                                 {commentsData.map(comment => (
-                                    <tr>
-                                        <th scope="row" key={comment.id}>
+                                    <tr key={comment.id}>
+                                        <th scope="row" >
                                             {comment.id}
                                         </th>
-                                        <td><Link to={`users/${comment.id}`} style={{textDecoration:"none", color:"black"}}>{comment.uname}</Link></td>
+                                        <td><Link to={`users/${comment.id}`} style={{ textDecoration: "none", color: "black" }}>{comment.uname}</Link></td>
                                         <td>{comment.email}</td>
-                                        <td><a href={`https://`+ comment.website} target="_blank">{comment.website}</a></td>
+                                        <td><a href={`https://` + comment.website} target="_blank">{comment.website}</a></td>
                                     </tr>
                                 ))}
                             </tbody>

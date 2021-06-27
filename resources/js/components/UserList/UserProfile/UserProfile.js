@@ -115,8 +115,8 @@ const UserProfile = () => {
                                     <thead>
                                         <tr>
                                             <th scope="col">ID</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Description</th>
                                             {/* <th scope="col">Handle</th> */}
                                         </tr>
                                     </thead>

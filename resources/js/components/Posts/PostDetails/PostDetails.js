@@ -13,6 +13,7 @@ const PostDetails = () => {
     const [comments, setComments] = useState();
     const [mount, setMount] = useState(true);
     const [hover, setHover] = useState(false);
+    const [visible, setVisible] = useState(10);
     useEffect(() => {
         axios.get(`/api/posts/${id}`)
             .then(res => {
@@ -27,8 +28,8 @@ const PostDetails = () => {
                 // console.log("comm", res.data);
 
             })
-            .catch(error => console.log(error.message))
-    }, [id, mount]);
+            .catch(error => console.log(error.message));
+    }, [id, mount, visible]);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = (data, e) => {
         const commentValue = {
@@ -51,6 +52,10 @@ const PostDetails = () => {
             .catch(error => {
                 // console.log(error.message);
             })
+
+    }
+    const handleLoadMore = () => {
+        setVisible(oldValue => oldValue + 10);
     }
     return (
         <div>
@@ -68,7 +73,7 @@ const PostDetails = () => {
                     </>
                 }
                 {
-                    details && comments && comments.map((comment) =>
+                    details && comments && comments.slice(0, visible).map((comment) =>
                         <div className="card  mb-2 "
                         // onMouseEnter={() => setHover(true)}
                         // onMouseLeave={() => setHover(false)}
@@ -79,19 +84,25 @@ const PostDetails = () => {
                                     <p>{comment.comment}</p>
                                 </div>
 
-                                <div className="">
-                                    {loggedInUser === comment.commentator && 
-                                    // hover &&
-                                    <>
-                                    <button className="btn btn-success">Edit</button>
-                                    <button className="btn btn-danger">Delete</button>
-                                    </>
+                                <div className="d-flex align-items-center">
+                                    {loggedInUser === comment.commentator &&
+                                        // hover &&
+                                        <>
+                                            <button className="btn btn-success">Edit</button>
+                                            <button className="btn btn-danger">Delete</button>
+                                        </>
                                     }
                                 </div>
                             </div>
+
                         </div>
                     )
                 }
+                {
+                    comments && comments.length > visible &&
+                    <button className="btn btn-primary " onClick={handleLoadMore}>view previous comments</button>
+                }
+
                 {
                     loggedInUser && details ?
                         <>

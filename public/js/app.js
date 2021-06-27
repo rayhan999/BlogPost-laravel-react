@@ -15467,13 +15467,6 @@ var Login = function Login() {
                   icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__.faKey
                 })
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
-              className: "see-pass",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__.FontAwesomeIcon, {
-                icon: seePassword ? _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__.faEyeSlash : _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__.faEye,
-                className: "see-pass-icon",
-                onClick: handlePassShow
-              })
             }), loginFailed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "alert text-danger  fade show",
               role: "alert",
@@ -16161,6 +16154,11 @@ var PostDetails = function PostDetails() {
       hover = _useState8[0],
       setHover = _useState8[1];
 
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(10),
+      _useState10 = _slicedToArray(_useState9, 2),
+      visible = _useState10[0],
+      setVisible = _useState10[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     axios.get("/api/posts/".concat(id)).then(function (res) {
       setDetails(res.data[0]); // // console.log("details", res.data);
@@ -16172,7 +16170,7 @@ var PostDetails = function PostDetails() {
     })["catch"](function (error) {
       return console.log(error.message);
     });
-  }, [id, mount]);
+  }, [id, mount, visible]);
 
   var _useForm = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_2__.useForm)(),
       register = _useForm.register,
@@ -16198,6 +16196,12 @@ var PostDetails = function PostDetails() {
     });
   };
 
+  var handleLoadMore = function handleLoadMore() {
+    setVisible(function (oldValue) {
+      return oldValue + 10;
+    });
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Navbar_Navbar__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "container mt-5",
@@ -16214,7 +16218,7 @@ var PostDetails = function PostDetails() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
           children: "comments"
         })]
-      }), details && comments && comments.map(function (comment) {
+      }), details && comments && comments.slice(0, visible).map(function (comment) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "card  mb-2 " // onMouseEnter={() => setHover(true)}
           // onMouseLeave={() => setHover(false)}
@@ -16229,7 +16233,7 @@ var PostDetails = function PostDetails() {
                 children: comment.comment
               })]
             }, comment.id), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-              className: "",
+              className: "d-flex align-items-center",
               children: loggedInUser === comment.commentator &&
               /*#__PURE__*/
               // hover &&
@@ -16245,6 +16249,10 @@ var PostDetails = function PostDetails() {
             })]
           })
         });
+      }), comments && comments.length > visible && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+        className: "btn btn-primary ",
+        onClick: handleLoadMore,
+        children: "view previous comments"
       }), loggedInUser && details ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "mt-5",
@@ -16341,8 +16349,7 @@ var Posts = function Posts() {
   var handleLoadMore = function handleLoadMore() {
     setVisible(function (oldValue) {
       return oldValue + 10;
-    }); // console.log(posts.length);
-    // console.log(visible);
+    });
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -16689,8 +16696,7 @@ var UserList = function UserList() {
   }, [totalPages, currentPage]);
 
   var onInputChange = function onInputChange(value) {
-    setSearch(value); // onSearch(value);
-
+    setSearch(value);
     setCurrentPage(1);
   };
 
@@ -16733,16 +16739,12 @@ var UserList = function UserList() {
                 children: "Show "
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("select", {
                 className: "btn btn-secondary",
+                defaultValue: ItemsPerPage,
                 onChange: function onChange(e) {
-                  return setItemsPerPage(e.target.value);
+                  setItemsPerPage(e.target.value);
+                  setCurrentPage(1);
                 },
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
-                  value: ItemsPerPage,
-                  selected: true,
-                  disabled: true,
-                  hidden: true,
-                  children: ItemsPerPage
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
                   className: "bg-white text-muted",
                   children: "2"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
@@ -16797,7 +16799,7 @@ var UserList = function UserList() {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                     scope: "row",
                     children: comment.id
-                  }, comment.id), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
                       to: "users/".concat(comment.id),
                       style: {
@@ -16815,7 +16817,7 @@ var UserList = function UserList() {
                       children: comment.website
                     })
                   })]
-                });
+                }, comment.id);
               })
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -17189,10 +17191,10 @@ var UserProfile = function UserProfile() {
                     children: "ID"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                     scope: "col",
-                    children: "First"
+                    children: "Title"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                     scope: "col",
-                    children: "Last"
+                    children: "Description"
                   })]
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {

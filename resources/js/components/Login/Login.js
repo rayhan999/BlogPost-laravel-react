@@ -91,7 +91,7 @@ const Login = () => {
                                 <p><FontAwesomeIcon icon={faKey}></FontAwesomeIcon></p>
 
                             </div>
-                            <p className="see-pass"><FontAwesomeIcon icon={seePassword ? faEyeSlash : faEye} className="see-pass-icon" onClick={handlePassShow}></FontAwesomeIcon></p>
+                            {/* <p className="see-pass"><FontAwesomeIcon icon={seePassword ? faEyeSlash : faEye} className="see-pass-icon" onClick={handlePassShow}></FontAwesomeIcon></p> */}
 
                             {
                                 loginFailed &&

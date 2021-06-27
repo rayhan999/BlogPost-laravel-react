@@ -57,7 +57,7 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        $commentDetails = Comment::where('post_id', $id)->get();
+        $commentDetails = Comment::where('post_id', $id)->orderBy('id', 'DESC')->get();
         // error_log("------------------------------------");
         // error_log($postDetails);
         return $commentDetails;

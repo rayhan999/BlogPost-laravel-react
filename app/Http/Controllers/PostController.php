@@ -17,7 +17,7 @@ class PostController extends Controller
         // error_log("------------------------------------");
 
         $value = $req->cookie('uname');
-        $myposts = Post::all();
+        $myposts = Post::orderBy('id', 'DESC')->get();
         // error_log($myposts);
         return $myposts;
     }

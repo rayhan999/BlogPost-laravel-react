@@ -16,8 +16,6 @@ const Posts = () => {
     }, []);
     const handleLoadMore = () => {
         setVisible(oldValue=> oldValue + 10);
-        // console.log(posts.length);
-        // console.log(visible);
     }
     return (
         <div>
