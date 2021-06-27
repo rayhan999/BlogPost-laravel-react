@@ -35,6 +35,9 @@ function Example() {
                 <Router>
 
                     <Switch>
+                    <Route exact path="/">
+                            <Posts></Posts>
+                        </Route>
                         <Route exact path="/posts">
                             <Posts></Posts>
                         </Route>
