@@ -16144,9 +16144,10 @@ var Navbar = function Navbar() {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
       className: "navbar-brand ",
       style: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: 'white'
       },
-      children: "TechNext"
+      children: "Blog-Post"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
       className: "navbar-toggler",
       type: "button",

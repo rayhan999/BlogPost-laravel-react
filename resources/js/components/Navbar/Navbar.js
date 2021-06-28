@@ -19,7 +19,7 @@ const Navbar = () => {
     window.addEventListener('scroll', changeNavBG);
     return (
         <nav className= "navbar navbar-expand-lg bg-primary "  >
-            <h1 className="navbar-brand " style={{ fontWeight: 'bold' }} >TechNext</h1>
+            <h1 className="navbar-brand " style={{ fontWeight: 'bold', color: 'white' }} >Blog-Post</h1>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon float-end"></span>
             </button>
