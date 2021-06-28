@@ -62,11 +62,11 @@ const AddPost = () => {
                 <h1>Update Post</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-3">
-                        <label className="form-label">Email address</label>
+                        <label className="form-label">Blog Title</label>
                         <input type="text" className="form-control" placeholder="Enter Title" {...register("title", { required: true })} />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                        <label htmlFor="exampleInputPassword1" className="form-label">Blog description</label>
                         <textarea name="description" className="form-control" cols="20" rows="5" {...register("description", { required: true })}></textarea>
                     </div>
                     <div className="mb-3">

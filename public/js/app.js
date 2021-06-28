@@ -15731,7 +15731,7 @@ var AddPost = function AddPost() {
           className: "mb-3",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             className: "form-label",
-            children: "Email address"
+            children: "Blog Title"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", _objectSpread({
             type: "text",
             className: "form-control",
@@ -15744,7 +15744,7 @@ var AddPost = function AddPost() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             htmlFor: "exampleInputPassword1",
             className: "form-label",
-            children: "Password"
+            children: "Blog description"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("textarea", _objectSpread({
             name: "description",
             className: "form-control",
