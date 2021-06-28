@@ -15368,6 +15368,15 @@ var Login = function Login() {
       newUser = _useState10[0],
       setNewUser = _useState10[1];
 
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+      _useState12 = _slicedToArray(_useState11, 2),
+      mount = _useState12[0],
+      setMount = _useState12[1]; // useEffect(() => {
+  //     // handleToggle();
+  //     setSignup(!signup);
+  // },[mount])
+
+
   var handleToggle = function handleToggle() {
     setSignup(!signup);
     setNewUser(!newUser);
@@ -15407,7 +15416,10 @@ var Login = function Login() {
     } else {
       axios.post('/api/register', eventDdata).then(function (res) {
         if (res.data) {
-          setSignup(!signup); // // console.log("data",res.data);
+          // setMount(!mount);
+          // window.location.reload();
+          history.push("/"); // setSignup(!signup);
+          // // console.log("data",res.data);
         } else {
           setSignUpFailed(true); // console.log("fals");
         }
@@ -15424,6 +15436,9 @@ var Login = function Login() {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("section", {
     className: "loginSection",
+    style: {
+      height: '100vh'
+    },
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       className: signup ? 'container active' : 'container',
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -15432,7 +15447,7 @@ var Login = function Login() {
           className: "imgBx",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
             className: "img-fluid",
-            src: "https://image.freepik.com/free-vector/male-couriers-delivering-parcels_74855-14101.jpg",
+            src: "https://image.freepik.com/free-vector/blogging-fun-content-creation-online-streaming-video-blog-young-girl-making-selfie-social-network-sharing-feedback-self-promotion-strategy_335657-2386.jpg",
             alt: ""
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
@@ -15573,7 +15588,7 @@ var Login = function Login() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "imgBx",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
-            src: "https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img2.jpg",
+            src: "https://image.freepik.com/free-vector/blog-post-concept-illustration_114360-154.jpg",
             alt: ""
           })
         })]
@@ -15644,8 +15659,7 @@ var AddPost = function AddPost() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
       postImg = _useState2[0],
-      setPostImg = _useState2[1]; // console.log("postImg",postImg);
-
+      setPostImg = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -15663,8 +15677,6 @@ var AddPost = function AddPost() {
       setErr = _useState8[1];
 
   var handleFile = function handleFile(e) {
-    // console.log(e.target.files[0]);
-    // setPostImg(e.target.files[0]);
     setErr(false);
     var selected = e.target.files[0];
     setPostImg(selected);
@@ -15688,19 +15700,14 @@ var AddPost = function AddPost() {
   };
 
   var onSubmit = function onSubmit(data) {
-    // console.log("postData",data);
     var eventData = {
       title: data.title,
-      description: data.description // image:data.image[0]
-
-    }; // console.log(eventData);
-
+      description: data.description
+    };
     var formData = new FormData();
     formData.append('title', eventData.title);
     formData.append('description', eventData.description);
-    formData.append('image', postImg); // formData.append('file', file);
-    // console.log("formData",formData);
-
+    formData.append('image', postImg);
     axios.post('/api/addpost', formData).then(function (res) {
       if (res) {
         // console.log("data", res);
@@ -15708,7 +15715,8 @@ var AddPost = function AddPost() {
       } else {
         console.log("fals");
       }
-    })["catch"](function (error) {// console.log(error.message);
+    })["catch"](function (error) {
+      console.log(error.message);
     });
   };
 
@@ -15749,22 +15757,16 @@ var AddPost = function AddPost() {
           className: "mb-3",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             className: "form-label mb-3",
-            children: "Email address"
-          }), !imgPreview // && !editServiceImg 
-          ?
-          /*#__PURE__*/
-          (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+            children: "Image"
+          }), !imgPreview ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
               type: "file",
               className: "form-control",
               onChange: handleFile
             })
-          }) : imgPreview // && editServiceImg 
-          &&
-          /*#__PURE__*/
-          (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          }) : imgPreview && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             style: {
-              background: imgPreview ? "url(\"".concat(imgPreview, "\") no-repeat center/cover") : "#131313",
+              background: imgPreview ? "url(\"".concat(imgPreview, "\") no-repeat center/cover") : "white",
               height: "100px",
               width: "100px",
               borderRadius: "10%",
@@ -15772,7 +15774,7 @@ var AddPost = function AddPost() {
             },
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
               type: "button",
-              className: "btn deleteImageBtn",
+              className: "btn deleteImageBtn bg-primary",
               onClick: function onClick() {
                 return setImgPreview(null);
               },
@@ -15780,7 +15782,6 @@ var AddPost = function AddPost() {
                 position: "relative",
                 top: "-15px",
                 left: "85px",
-                backgroundColor: "#c009f8",
                 padding: "0 6px !important",
                 color: "white",
                 borderRadius: "50%"
@@ -15791,6 +15792,7 @@ var AddPost = function AddPost() {
             })
           })]
         }), err && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          className: "text-danger",
           children: "Unsupported File"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
           type: "submit",
@@ -16739,8 +16741,7 @@ var UserList = function UserList() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       comments = _useState2[0],
-      setComments = _useState2[1]; // const [loader, showLoader, hideLoader] = useFullPageLoader();
-
+      setComments = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -16765,7 +16766,7 @@ var UserList = function UserList() {
       sorting = _useState10[0],
       setSorting = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(localStorage.getItem('ItemsPerPage') || 5),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(parseInt(localStorage.getItem('ItemsPerPage')) || 5),
       _useState12 = _slicedToArray(_useState11, 2),
       ItemsPerPage = _useState12[0],
       setItemsPerPage = _useState12[1];
@@ -16773,9 +16774,7 @@ var UserList = function UserList() {
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState14 = _slicedToArray(_useState13, 2),
       totalPages = _useState14[0],
-      setTotalPages = _useState14[1]; // const [search, setSearch] = useState("");
-  // const ItemsPerPage = 2;
-
+      setTotalPages = _useState14[1];
 
   var headers = [{
     name: "ID",
@@ -16795,21 +16794,11 @@ var UserList = function UserList() {
     sortable: false
   }];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var getData = function getData() {
-      // showLoader();
-      fetch("/api/users").then(function (response) {
-        return response.json();
-      }).then(function (json) {
-        // hideLoader();
-        setComments(json); // console.log(json);
-      });
-    };
-
-    getData(); // axios.get(`/api/users`)
-    //     .then(res => {
-    //         setUsers(res.data);
-    //     })
-    //     .catch(error => console.log(error.message))
+    axios.get("/api/users").then(function (res) {
+      setComments(res.data);
+    })["catch"](function (error) {
+      return console.log(error.message);
+    });
 
     if (totalItems > 0 && ItemsPerPage > 0) {
       setTotalPages(Math.ceil(totalItems / ItemsPerPage));
@@ -16906,7 +16895,7 @@ var UserList = function UserList() {
                 className: "btn btn-secondary",
                 defaultValue: ItemsPerPage,
                 onChange: function onChange(e) {
-                  setItemsPerPage(e.target.value);
+                  setItemsPerPage(parseInt(e.target.value));
                   setCurrentPage(1);
                 },
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
@@ -16918,6 +16907,9 @@ var UserList = function UserList() {
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
                   className: "bg-white text-muted",
                   children: "5"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
+                  className: "bg-white text-muted",
+                  children: "10"
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                 children: " Entries"
@@ -17011,166 +17003,6 @@ var UserList = function UserList() {
 
 /***/ }),
 
-/***/ "./resources/js/components/UserList/UserProfile/UserPosts.js":
-/*!*******************************************************************!*\
-  !*** ./resources/js/components/UserList/UserProfile/UserPosts.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Pagination */ "./node_modules/react-bootstrap/esm/Pagination.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-
-var UserPosts = function UserPosts(_ref) {
-  var uname = _ref.uname;
-
-  // console.log(uname);
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      posts = _useState2[0],
-      setPosts = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState4 = _slicedToArray(_useState3, 2),
-      totalItems = _useState4[0],
-      setTotalItems = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
-      _useState6 = _slicedToArray(_useState5, 2),
-      currentPage = _useState6[0],
-      setCurrentPage = _useState6[1];
-
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(5),
-      _useState8 = _slicedToArray(_useState7, 2),
-      ItemsPerPage = _useState8[0],
-      setItemsPerPage = _useState8[1];
-
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState10 = _slicedToArray(_useState9, 2),
-      totalPages = _useState10[0],
-      setTotalPages = _useState10[1];
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    axios.get("/api/users/posts/".concat(uname)).then(function (res) {
-      setPosts(res.data); // console.log("posts", res.data);
-    })["catch"](function (error) {
-      return console.log(error.message);
-    });
-
-    if (totalItems > 0 && ItemsPerPage > 0) {
-      setTotalPages(Math.ceil(totalItems / ItemsPerPage));
-    }
-  }, [totalItems, ItemsPerPage]);
-  var commentsData = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
-    var computedComments = posts;
-    setTotalItems(computedComments.length); //Current Page slice
-
-    return computedComments.slice((currentPage - 1) * ItemsPerPage, (currentPage - 1) * ItemsPerPage + ItemsPerPage);
-  }, [posts, currentPage, ItemsPerPage]);
-  var paginationItems = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
-    var pages = [];
-
-    var _loop = function _loop(i) {
-      pages.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2__.default.Item, {
-        active: i == currentPage,
-        onClick: function onClick() {
-          return setCurrentPage(i);
-        },
-        children: i
-      }, i));
-    };
-
-    for (var i = 1; i <= totalPages; i++) {
-      _loop(i);
-    }
-
-    return pages;
-  }, [totalPages, currentPage]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-      children: "posts"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("table", {
-      className: "table",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("thead", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tr", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
-            scope: "col",
-            children: "#"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
-            scope: "col",
-            children: "First"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
-            scope: "col",
-            children: "Last"
-          })]
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tbody", {
-        children: commentsData.map(function (post) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
-              scope: "row",
-              children: post.id
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-                to: "/posts/".concat(post.id),
-                style: {
-                  textDecoration: "none",
-                  color: "black"
-                },
-                children: post.title
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
-              children: post.description
-            })]
-          }, post.id);
-        })
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "d-flex justify-content-end",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2__.default, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2__.default.Prev, {
-          onClick: function onClick() {
-            return setCurrentPage(currentPage - 1);
-          },
-          disabled: currentPage === 1
-        }), paginationItems, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_2__.default.Next, {
-          onClick: function onClick() {
-            return setCurrentPage(currentPage + 1);
-          },
-          disabled: currentPage === totalPages
-        })]
-      })
-    })]
-  });
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserPosts);
-
-/***/ }),
-
 /***/ "./resources/js/components/UserList/UserProfile/UserProfile.js":
 /*!*********************************************************************!*\
   !*** ./resources/js/components/UserList/UserProfile/UserProfile.js ***!
@@ -17183,12 +17015,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Pagination */ "./node_modules/react-bootstrap/esm/Pagination.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Pagination */ "./node_modules/react-bootstrap/esm/Pagination.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Navbar_Navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Navbar/Navbar */ "./resources/js/components/Navbar/Navbar.js");
-/* harmony import */ var _UserPosts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserPosts */ "./resources/js/components/UserList/UserProfile/UserPosts.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -17209,9 +17040,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var UserProfile = function UserProfile() {
-  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useParams)(),
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useParams)(),
       id = _useParams.id;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
@@ -17287,7 +17117,7 @@ var UserProfile = function UserProfile() {
     var pages = [];
 
     var _loop = function _loop(i) {
-      pages.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_5__.default.Item, {
+      pages.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_4__.default.Item, {
         active: i == currentPage,
         onClick: function onClick() {
           return setCurrentPage(i);
@@ -17302,40 +17132,40 @@ var UserProfile = function UserProfile() {
 
     return pages;
   }, [totalPages, currentPage]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Navbar_Navbar__WEBPACK_IMPORTED_MODULE_1__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Navbar_Navbar__WEBPACK_IMPORTED_MODULE_1__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "container mt-5",
-      children: user && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+      children: user && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           children: "User Profile"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
               src: "",
               alt: "",
               height: "50"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               className: "d-flex",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                 children: "User Name: \xA0"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h4", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h4", {
                 children: [" ", user.uname]
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               className: "d-flex",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                 children: "Email: \xA0"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h4", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h4", {
                 children: [" ", user.email]
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               className: "d-flex",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                 children: "Website: \xA0"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
                   href: "https://" + user.website,
                   target: "_blank",
                   children: [" ", user.website]
@@ -17343,33 +17173,33 @@ var UserProfile = function UserProfile() {
               })]
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
               children: "posts"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("table", {
               className: "table",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("thead", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
                     scope: "col",
                     children: "ID"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
                     scope: "col",
                     children: "Title"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
                     scope: "col",
                     children: "Description"
                   })]
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
                 children: commentsData.map(function (post) {
-                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
                       scope: "row",
                       children: post.id
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
                         to: "/posts/".concat(post.id),
                         style: {
                           textDecoration: "none",
@@ -17377,21 +17207,21 @@ var UserProfile = function UserProfile() {
                         },
                         children: post.title
                       })
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
                       children: [post.description.slice(0, 50), "..."]
                     })]
                   }, post.id);
                 })
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
               className: "d-flex justify-content-end",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_5__.default, {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_5__.default.Prev, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_4__.default, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_4__.default.Prev, {
                   onClick: function onClick() {
                     return setCurrentPage(currentPage - 1);
                   },
                   disabled: currentPage === 1
-                }), paginationItems, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_5__.default.Next, {
+                }), paginationItems, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_bootstrap_Pagination__WEBPACK_IMPORTED_MODULE_4__.default.Next, {
                   onClick: function onClick() {
                     return setCurrentPage(currentPage + 1);
                   },

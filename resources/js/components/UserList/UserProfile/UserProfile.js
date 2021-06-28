@@ -2,7 +2,6 @@ import React, { useEffect, useState, useMemo } from "react";
 import PaginationComponent from "react-bootstrap/Pagination";
 import { useHistory, useParams, Link } from 'react-router-dom';
 import Navbar from '../../Navbar/Navbar';
-import UserPosts from './UserPosts';
 
 const UserProfile = () => {
     const { id } = useParams();
@@ -108,7 +107,6 @@ const UserProfile = () => {
                             </div>
                         </div>
                         <div>
-                            {/* <UserPosts uname={user.uname}></UserPosts> */}
                             <div>
                                 <h1>posts</h1>
                                 <table className="table">

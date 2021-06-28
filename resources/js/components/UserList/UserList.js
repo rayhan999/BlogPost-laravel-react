@@ -8,15 +8,12 @@ import Navbar from '../Navbar/Navbar';
 
 const UserList = () => {
     const [comments, setComments] = useState([]);
-    // const [loader, showLoader, hideLoader] = useFullPageLoader();
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(localStorage.getItem('currentPage') || 1);
     const [search, setSearch] = useState(localStorage.getItem('search') || "");
     const [sorting, setSorting] = useState({ field: "", order: "" });
-    const [ItemsPerPage, setItemsPerPage] = useState(localStorage.getItem('ItemsPerPage') || 5);
+    const [ItemsPerPage, setItemsPerPage] = useState(parseInt(localStorage.getItem('ItemsPerPage')) || 5);
     const [totalPages, setTotalPages] = useState(0);
-    // const [search, setSearch] = useState("");
-    // const ItemsPerPage = 2;
 
     const headers = [
         { name: "ID", field: "id", sortable: false },
@@ -26,26 +23,13 @@ const UserList = () => {
     ];
 
     useEffect(() => {
-        const getData = () => {
-            // showLoader();
-
-            fetch("/api/users")
-                .then(response => response.json())
-                .then(json => {
-                    // hideLoader();
-                    setComments(json);
-                    // console.log(json);
-                });
-        };
-
-        getData();
-        // axios.get(`/api/users`)
-        //     .then(res => {
-        //         setUsers(res.data);
+        axios.get(`/api/users`)
+            .then(res => {
+                setComments(res.data);
 
 
-        //     })
-        //     .catch(error => console.log(error.message))
+            })
+            .catch(error => console.log(error.message))
         if (totalItems > 0 && ItemsPerPage > 0) {
             setTotalPages(Math.ceil(totalItems / ItemsPerPage));
         }
@@ -134,12 +118,12 @@ const UserList = () => {
                                 <select
                                     className="btn btn-secondary"
                                     defaultValue={ItemsPerPage}
-                                    onChange={e => { setItemsPerPage(e.target.value); setCurrentPage(1); }}
+                                    onChange={e => { setItemsPerPage(parseInt(e.target.value)); setCurrentPage(1); }}
                                 >
-                                    {/* <option value={ItemsPerPage} selected disabled hidden>{ItemsPerPage}</option> */}
                                     <option className="bg-white text-muted">2</option>
                                     <option className="bg-white text-muted">3</option>
                                     <option className="bg-white text-muted">5</option>
+                                    <option className="bg-white text-muted">10</option>
                                 </select>
 
                                 <span> Entries</span>

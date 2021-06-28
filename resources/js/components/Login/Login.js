@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import Cookies from 'js-cookie';
 import { useContext } from 'react';
@@ -17,6 +17,11 @@ const Login = () => {
     const [signUpFailed, setSignUpFailed] = useState(false);
     const [seePassword, setSeePassword] = useState(false);
     const [newUser, setNewUser] = useState(false);
+    const [mount, setMount] = useState(true);
+    // useEffect(() => {
+    //     // handleToggle();
+    //     setSignup(!signup);
+    // },[mount])
     const handleToggle = () => {
         setSignup(!signup);
         setNewUser(!newUser);
@@ -51,7 +56,10 @@ const Login = () => {
 
                 .then(res => {
                     if (res.data) {
-                        setSignup(!signup);
+                        // setMount(!mount);
+                        // window.location.reload();
+                        history.push("/");
+                        // setSignup(!signup);
                         // // console.log("data",res.data);
                     } else {
                         setSignUpFailed(true);
@@ -69,12 +77,12 @@ const Login = () => {
         setSeePassword(!seePassword);
     }
     return (
-        <section className="loginSection">
+        <section className="loginSection" style={{height: '100vh'}}>
 
             <div className={signup ? 'container active' : 'container'}>
                 <div className="user signinBx">
                     <div className="imgBx">
-                        <img className="img-fluid" src="https://image.freepik.com/free-vector/male-couriers-delivering-parcels_74855-14101.jpg" alt="" />
+                        <img className="img-fluid" src="https://image.freepik.com/free-vector/blogging-fun-content-creation-online-streaming-video-blog-young-girl-making-selfie-social-network-sharing-feedback-self-promotion-strategy_335657-2386.jpg" alt="" />
                     </div>
 
                     <div className="formBx">
@@ -141,7 +149,7 @@ const Login = () => {
                             </p>
                         </form>
                     </div>
-                    <div className="imgBx"><img src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img2.jpg" alt="" /></div>
+                    <div className="imgBx"><img src="https://image.freepik.com/free-vector/blog-post-concept-illustration_114360-154.jpg" alt="" /></div>
                 </div>
             </div>
 
