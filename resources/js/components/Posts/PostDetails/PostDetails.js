@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useParams, Link } from 'react-router-dom';
-import { useContext } from 'react';
 import Cookies from 'js-cookie';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
+import { Link, useParams } from 'react-router-dom';
 import { UserContext } from '../../Example';
 import Navbar from '../../Navbar/Navbar';
-import { post } from 'jquery';
 
 const PostDetails = () => {
     const { id } = useParams();
@@ -14,6 +12,7 @@ const PostDetails = () => {
     const [comments, setComments] = useState();
     const [mount, setMount] = useState(true);
     const [hover, setHover] = useState(false);
+    const [hoverID, setHoverID] = useState(null);
     const [visible, setVisible] = useState(10);
     useEffect(() => {
         axios.get(`/api/posts/${id}`)
@@ -66,9 +65,9 @@ const PostDetails = () => {
                 {
                     details &&
                     <>
-                        
+
                         <div className="">
-                        <img src={`../${details.image}`} alt="a" className="img-fluid" width="100%" style={{height:"60vh"}}/>
+                            <img src={`../${details.image}`} alt="a" className="img-fluid" width="100%" style={{ height: "60vh" }} />
                             <h1>{details.title}</h1>
                             <small>{details.creator}</small>
                             <p>{details.description}</p>
@@ -79,8 +78,8 @@ const PostDetails = () => {
                 {
                     details && comments && comments.slice(0, visible).map((comment) =>
                         <div className="card  mb-2 " key={comment.id}
-                        // onMouseEnter={() => setHover(true)}
-                        // onMouseLeave={() => setHover(false)}
+                            onMouseEnter={() => { setHover(true); setHoverID(comment.id); }}
+                            onMouseLeave={() => {setHover(false);setHoverID(null);}}
                         >
                             <div className="d-flex justify-content-between pl-5 pr-5">
                                 <div className="">
@@ -89,7 +88,8 @@ const PostDetails = () => {
                                 </div>
 
                                 <div className="d-flex align-items-center">
-                                    {loggedInUser === comment.commentator &&
+                                    {loggedInUser === comment.commentator
+                                        && comment.id === hoverID &&
                                         // hover &&
                                         <>
                                             <button className="btn btn-success">Edit</button>

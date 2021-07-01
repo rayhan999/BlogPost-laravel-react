@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { faCloudUploadAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
 import Navbar from '../../Navbar/Navbar';
@@ -79,6 +79,7 @@ const AddPost = () => {
                                 :
                                 imgPreview &&
                                 <div
+                                className="shadow"
                                     style={{
                                         background: imgPreview
                                             ? `url("${imgPreview}") no-repeat center/cover`
@@ -86,7 +87,8 @@ const AddPost = () => {
                                         height: "100px", 
                                         width: "100px", 
                                         borderRadius: "10%", 
-                                        position: "relative"
+                                        position: "relative",
+                                        border: "1px solid blue"
                                     }}
                                 >
                                     <button type="button" className="btn deleteImageBtn bg-primary" onClick={() => setImgPreview(null)}
